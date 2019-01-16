@@ -1,4 +1,6 @@
 .ghc.environment*
 dist-newstyle/
 dist/
+*.o*
+
 
