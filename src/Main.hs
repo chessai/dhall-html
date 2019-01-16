@@ -3,10 +3,13 @@
 
 import Data.Text (Text)
 import Dhall
+import Dhall.Core
 import Text.Taggy.DOM
 import Text.Taggy.Renderer
+import Data.HashMap.Strict (HashMap)
 import qualified Data.Text.Lazy as T
 import qualified Data.Text.Lazy.IO as T
+import qualified Data.HashMap.Strict as HM
 
 data Example = Example 
   { name :: Dhall.Text
@@ -25,7 +28,7 @@ main = do
   newline
 
   -- Print dhall file
-  people <- Dhall.input Dhall.auto "./misc/people"
+  people <- Dhall.input Dhall.auto "./misc/people.dhall"
   mapM_ print (people :: [Example])
 
   newline
@@ -34,3 +37,8 @@ main = do
   mapM_ T.putStrLn $ render <$> parseDOM True ipsum
 
   pure()
+
+hashmap :: HashMap Text (Expr s a)
+hashmap = HM.fromList
+  [ ( "let" , Let )
+  ]
